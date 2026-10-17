@@ -18,11 +18,11 @@ LOCALIDADES = {
     "Patquía": (-30.0468, -66.8823),
     "Punta de los Llanos": (-30.1455, -66.5262),
     "Tama": (-30.5058, -66.2952),
-    "San Carlos de Bariloche": (-41.1335, -71.3103),
+    "San Carlos de Bariloche": (-40.7500, -71.5000),
 }
 
-TOKEN = os.getenv("8882322196:AAGYo3rXhptjmA4vzkt-hvkKZ6QT8b3T7ZM")
-CHAT_ID = os.getenv("-1004459131844")
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHANNEL_ID")
 
 HISTORIAL = Path("historial_alertas.json")
 TIMEOUT = 30
