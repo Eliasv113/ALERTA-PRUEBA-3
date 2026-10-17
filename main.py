@@ -4,6 +4,48 @@ import json
 import requests
 import xml.etree.ElementTree as ET
 
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
+
+MESES = [
+    "enero", "febrero", "marzo", "abril",
+    "mayo", "junio", "julio", "agosto",
+    "septiembre", "octubre", "noviembre", "diciembre"
+]
+
+TRADUCCIONES = {
+    "Extreme": "Extrema",
+    "Severe": "Severa",
+    "Moderate": "Moderada",
+    "Minor": "Leve",
+    "Unknown": "Desconocida",
+    "Observed": "Observada",
+    "Likely": "Probable",
+    "Possible": "Posible",
+    "Unlikely": "Poco probable",
+    "Immediate": "Inmediata",
+    "Expected": "Prevista",
+    "Future": "Futura",
+    "Past": "Pasada",
+}
+
+def traducir(valor):
+    return TRADUCCIONES.get(valor, valor)
+
+def fecha_argentina(fecha):
+    if not fecha:
+        return "Sin especificar"
+
+    fecha = fecha.replace("Z", "+00:00")
+    dt = datetime.fromisoformat(fecha)
+
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+
+    dt = dt.astimezone(ZoneInfo("America/Argentina/Buenos_Aires"))
+    mes = MESES[dt.month - 1]
+
+    return f"{dt.day} de {mes} - {dt:%H:%M}"
 from pathlib import Path
 from urllib.parse import urljoin
 from datetime import datetime, timezone
